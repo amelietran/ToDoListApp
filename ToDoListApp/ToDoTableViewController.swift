@@ -8,26 +8,27 @@
 import UIKit
 
 class ToDoTableViewController: UITableViewController {
-    var toDos : [ToDoCD] = []
-    
 
+    var toDos : [ToDo] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        getToDos()
-        
-    }
-    
-    func getToDos(){
-        
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
-            
-            if let coreDataToDos = try? context.fetch(ToDoCD.fetchRequest()) as? [ToDoCD] {
-                
-                toDos = coreDataToDos
-                tableView.reloadData()
-            }
+
+        func createToDos() -> [ToDo] {
+
+          let swift = ToDo()
+          swift.name = "Learn Swift"
+          swift.important = true
+
+          let dog = ToDo()
+          dog.name = "Walk the Dog"
+          // important is set to false by default
+
+          return [swift, dog]
         }
     }
+}
+        
     
         /* toDos = createToDos()
 
@@ -138,4 +139,4 @@ class ToDoTableViewController: UITableViewController {
     }
     }
 
-}
+
